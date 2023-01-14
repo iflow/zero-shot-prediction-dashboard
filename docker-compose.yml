@@ -1,0 +1,26 @@
+version: '0.1'
+
+services:
+#  model-server:
+#    image: tensorflow/serving
+#    command:
+#    - --model_config_file=/models/models.config
+#    - --model_config_file_poll_wait_seconds=60
+#    - --allow_version_labels_for_unavailable_models=true
+#    ports:
+#    - 8501:8501
+#    container_name: TF_serving
+#    tty: true
+#    volumes:
+#      - type: bind
+#        source: ./content
+#        target: /models/
+  gradio-app:
+    build:
+      context: ./gradioapp
+      dockerfile: dockerfile
+    restart: unless-stopped
+    ports:
+      - 7861:7861
+    volumes:
+      - ./flagged:/app/flagged
