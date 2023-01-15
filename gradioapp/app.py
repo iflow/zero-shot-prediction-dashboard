@@ -1,36 +1,78 @@
 import gradio as gr
+from transformers import pipeline
+import torch
+import os
+from wordcloud import WordCloud
+import pandas as pd
 
-def calculator(num1, operation, num2):
-    if operation == "add":
-        return num1 + num2
-    elif operation == "subtract":
-        return num1 - num2
-    elif operation == "multiply":
-        return num1 * num2
-    elif operation == "divide":
-        if num2 == 0:
-            raise gr.Error("Cannot divide by zero!")
-        return num1 / num2
+# Download and return list of sample images
+# from <https://picsum.photos>
+def downloadDemopics(n=10):
+    URL= "https://picsum.photos/600/600"
 
+    if not os.path.exists('pics/'):
+        os.mkdir('pics/')
+
+    for i in range(n):
+        torch.hub.download_url_to_file(URL, 'pics/sample{}.jpg'.format(i))
+
+    demoPics= ['pics/'+file for file in os.listdir("pics")]
+    return demoPics
+
+# create the WordCloud image
+def getWorldCloud(frequencies):
+    wordcloud = WordCloud(width=800, height=600, relative_scaling=0.8, background_color='white')
+
+    # generate the word cloud
+    wordcloud.generate_from_frequencies(frequencies)
+    image = wordcloud.to_image()
+
+    return image
+
+# zero-shot-image-classification
+# pipe= pipeline(task= "zero-shot-image-classification", model= "openai/clip-vit-large-patch14-336")
+
+# model that can do 22k-category classification
+pipe= pipeline(task= "image-classification", model= "microsoft/beit-base-patch16-224-pt22k-ft22k")
+
+def calc(image_to_classify):
+
+    # scores = pipe(image_to_classify= image_to_classify, candidate_labels = labels_for_classification)
+    scores = pipe(images= image_to_classify)
+
+    # transform result
+    df= pd.DataFrame(scores)
+    frequ= df[["label", "score"]].set_index("label").to_dict()["score"]
+    image= getWorldCloud(frequ)
+
+    return frequ, image
+
+# main
 if __name__ == '__main__':
-    iface = gr.Interface(
-        calculator,
-        [
-            "number",
-            gr.Radio(["add", "subtract", "multiply", "divide"]),
-            "number"
+
+    # download demo pictures
+    demoPics= downloadDemopics()
+
+    labels= "cat, dog, lion, cheetah, rabbit"
+    examples= [[pic, labels] for pic in demoPics]
+
+    demo = gr.Interface(
+        calc,
+        # [ # inputs
+        #     "image",
+        #     "text"
+        # ],
+        inputs=[gr.Image(type="pil", tool="select", shape=(800,800))],
+        outputs=[ # outputs
+            "label",
+            "image"
         ],
-        "number",
-        examples=[
-            [5, "add", 3],
-            [4, "divide", 2],
-            [-4, "multiply", 2.5],
-            [0, "subtract", 1.2],
-        ],
-        title="Toy Calculator",
-        description="Here's a sample toy calculator. Enjoy!",
+        examples= examples,
+        title= "Find the things",
+        description= "Please input a picture and a list of labels",
         allow_flagging= "manual",
-        flagging_options= ["does not work", "please check"]
+        flagging_options= ["COOL", "STRANGE"]
     )
 
-    iface.launch(server_name='0.0.0.0', server_port=7861)
+    demo.launch(server_name='0.0.0.0', server_port=7861)
+    # demo.launch()
