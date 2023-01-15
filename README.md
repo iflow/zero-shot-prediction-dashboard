@@ -1,5 +1,7 @@
 # zero-shot-prediction-dashboard
 
+[![Azure Web App deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/azure-container-webapp-deployment.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/azure-container-webapp-deployment.yml)
+
 ![flowchart.png](docs%2Fflowchart.png)
 
 ![covid-dashboard.png](docs%2Fcovid-dashboard.png)
