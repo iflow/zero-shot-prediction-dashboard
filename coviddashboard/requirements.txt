@@ -1,0 +1,4 @@
+matplotlib
+seaborn
+mljar-mercury
+covid19dh
