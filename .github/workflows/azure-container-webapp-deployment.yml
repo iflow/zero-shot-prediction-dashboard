@@ -1,9 +1,10 @@
 name: Azure Web App deployment
 
 env:
-  AZURE_WEBAPP_NAME: zero-shot-prediction-dashboard  # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: zero-shot-prediction-dashboard
 
 on:
+  workflow_dispatch: # Allows to manually trigger this GitHub action
   push:
     branches: [ "main" ]
 
