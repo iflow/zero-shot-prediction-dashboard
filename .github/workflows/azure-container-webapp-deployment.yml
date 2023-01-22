@@ -42,6 +42,7 @@ jobs:
           push: true
           tags: index.docker.io/malidkan/zspd-coviddashboard:${{ github.sha }}
           file: ./coviddashboard/dockerfile
+          context: ./coviddashboard
       
 
 #  deploy:
