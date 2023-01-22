@@ -33,6 +33,8 @@ jobs:
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_857d832c1cff47e281cacd492e5ec597 }}/zspd-gradio-app:${{ github.sha }}
         file: ./gradioapp/dockerfile
         context: ./gradioapp
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,5 +52,3 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_60577cf95d814a119793cb8c4f29f218 }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_857d832c1cff47e281cacd492e5ec597 }}/zspd-gradio-app:${{ github.sha }}'
-        ports: 80:7861
-        
