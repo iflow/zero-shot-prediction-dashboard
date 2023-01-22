@@ -24,6 +24,9 @@ Gradio as Docker image\
 <https://github.com/njanakiev/minimal-gradio>
 
 
+## Tensorflow-Serving
+Run setup.py to generate model files for the docker image
+
 ## Docker
 ### How to run
 docker-compose up -d 

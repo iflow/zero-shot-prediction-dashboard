@@ -1,20 +1,17 @@
 version: '3.8'
 
 services:
-#  model-server:
-#    image: tensorflow/serving
-#    command:
-#    - --model_config_file=/models/models.config
-#    - --model_config_file_poll_wait_seconds=60
-#    - --allow_version_labels_for_unavailable_models=true
-#    ports:
-#    - 8501:8501
-#    container_name: TF_serving
-#    tty: true
-#    volumes:
-#      - type: bind
-#        source: ./content
-#        target: /models/
+  model-server:
+    image: tensorflow/serving
+    command:
+      - --model_name=vit
+      - --model_base_path=/models/vit_serving/
+      - --rest_api_port=8501
+    ports:
+      - 8501:8501
+    tty: true
+    volumes:
+      - ./tfserving/:/models/
   gradio-app:
     build:
       context: ./gradioapp

@@ -4,6 +4,11 @@ import torch
 import os
 from wordcloud import WordCloud
 import pandas as pd
+import json
+from io import BytesIO
+from PIL import Image
+import requests
+import base64
 
 # Download and return list of sample images
 # from <https://picsum.photos>
@@ -20,7 +25,7 @@ def downloadDemopics(n=10):
     return demoPics
 
 # create the WordCloud image
-def getWorldCloud(frequencies):
+def getWordCloud(frequencies):
     wordcloud = WordCloud(width=800, height=600, relative_scaling=0.8, background_color='white')
 
     # generate the word cloud
@@ -35,17 +40,60 @@ def getWorldCloud(frequencies):
 # model that can do 22k-category classification
 pipe= pipeline(task= "image-classification", model= "microsoft/beit-base-patch16-224-pt22k-ft22k")
 
-def calc(image_to_classify):
+def classify(image_to_classify):
 
-    # scores = pipe(image_to_classify= image_to_classify, candidate_labels = labels_for_classification)
-    scores = pipe(images= image_to_classify)
+    # convert to base64
+    b64str= base64.urlsafe_b64encode(image_to_classify).decode("utf-8")
+
+    # prepare data
+    data = json.dumps({"signature_name": "serving_default", "instances": [b64str]})
+    # print("Data: {} ... {}".format(data[:50], data[len(data) - 52 :]))
+
+    # prepare header
+    headers = {"content-type": "application/json"}
+
+    # send request
+    json_response = requests.post(
+        "http://localhost:8501/v1/models/vit:predict", data=data, headers=headers
+    )
 
     # transform result
-    df= pd.DataFrame(scores)
-    frequ= df[["label", "score"]].set_index("label").to_dict()["score"]
-    image= getWorldCloud(frequ)
+    df= pd.DataFrame(json.loads(json_response.text))
+    frequ= df[["label", "confidence"]].set_index("label").to_dict()["confidence"]
+    image= getWordCloud(frequ)
 
     return frequ, image
+
+def nn():
+    import json
+    from io import BytesIO
+    from PIL import Image
+    import requests
+    import base64
+
+    url= "https://picsum.photos/600/600"
+    image = Image.open(requests.get(url, stream=True).raw)
+    display(image)
+
+    # convert to base64
+    buffer= BytesIO()
+    image.save(buffer, format="JPEG")
+    b64str= base64.urlsafe_b64encode(buffer.getvalue()).decode("utf-8")
+
+    # prepare data
+    data = json.dumps({"signature_name": "serving_default", "instances": [b64str]})
+    # print("Data: {} ... {}".format(data[:50], data[len(data) - 52 :]))
+
+    # prepare header
+    headers = {"content-type": "application/json"}
+
+    # send request
+    json_response = requests.post(
+        "http://localhost:8501/v1/models/vit:predict", data=data, headers=headers
+    )
+
+    # print response
+    print(json.loads(json_response.text))
 
 # main
 if __name__ == '__main__':
@@ -57,12 +105,12 @@ if __name__ == '__main__':
     examples= [[pic, labels] for pic in demoPics]
 
     demo = gr.Interface(
-        calc,
+        classify,
         # [ # inputs
         #     "image",
         #     "text"
         # ],
-        inputs=[gr.Image(type="pil", tool="select", shape=(800,800))],
+        inputs=[gr.Image(type="pil", tool="select", shape=(600,600))],
         outputs=[ # outputs
             "label",
             "image"
