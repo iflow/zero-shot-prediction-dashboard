@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_857d832c1cff47e281cacd492e5ec597 }}/zspd-gradio-app:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./gradioapp/dockerfile
 
   deploy:
     runs-on: ubuntu-latest
