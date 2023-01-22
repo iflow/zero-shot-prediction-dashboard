@@ -21,6 +21,8 @@ services:
       - 7861:7861
     volumes:
       - ./flagged:/app/flagged
+    environment:
+      - APP_BACKEND_URL=http://model-server:8501
   covid-dashboard:
     build:
       context: ./coviddashboard

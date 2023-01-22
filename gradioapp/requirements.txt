@@ -2,3 +2,5 @@ gradio
 transformers
 wordcloud
 torch
+requests
+Pillow
