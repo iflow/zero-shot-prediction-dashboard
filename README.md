@@ -1,5 +1,7 @@
 # zero-shot-prediction-dashboard
 
+[![Azure Web App deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/azure-container-webapp-deployment.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/azure-container-webapp-deployment.yml)
+
 ![flowchart.png](docs%2Fflowchart.png)
 
 ![covid-dashboard.png](docs%2Fcovid-dashboard.png)
@@ -40,5 +42,6 @@ docker-compose stop
 <http://localhost:7862>
 
 # Backup ideas
-Interactive demo: comparing image captioning models\
+* [ ] Interactive demo: comparing image captioning models\
 nielsr/comparing-captioning-models <https://huggingface.co/spaces/nielsr/comparing-captioning-models>
+* [ ] Trigger GitHub action any time there is a tag pushed to the repository.
