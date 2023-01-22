@@ -39,5 +39,6 @@ docker-compose stop
 <http://localhost:7862>
 
 # Backup ideas
-Interactive demo: comparing image captioning models\
+* [ ] Interactive demo: comparing image captioning models\
 nielsr/comparing-captioning-models <https://huggingface.co/spaces/nielsr/comparing-captioning-models>
+* [ ] Trigger GitHub action any time there is a tag pushed to the repository.
