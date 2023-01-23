@@ -1,6 +1,8 @@
 # zero-shot-prediction-dashboard
 
-[![Azure Web App deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/azure-container-webapp-deployment.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/azure-container-webapp-deployment.yml)
+[![Covid Dashboard Deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-coviddashboard.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-coviddashboard.yml)
+
+[![Gradio App Deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-gradio.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-gradio.yml)
 
 ![flowchart.png](docs%2Fflowchart.png)
 
