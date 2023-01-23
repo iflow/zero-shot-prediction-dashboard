@@ -31,7 +31,10 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e4908b53d1484295af6464c34fc1b7e8 }}/malidkan/zspd-coviddashboard:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./coviddashboard/dockerfile
+        context: ./coviddashboard
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
 
   deploy:
     runs-on: ubuntu-latest
