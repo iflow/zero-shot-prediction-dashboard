@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e4908b53d1484295af6464c34fc1b7e8 }}/malidkan/zspd-coviddashboard:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e4908b53d1484295af6464c34fc1b7e8 }}/zspd-coviddashboard:${{ github.sha }}
         file: ./coviddashboard/dockerfile
         context: ./coviddashboard
         cache-from: type=gha
@@ -51,4 +51,4 @@ jobs:
         app-name: 'zhpd-coviddashboard'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_4bddace353b94d34b61498d036fbf9b1 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e4908b53d1484295af6464c34fc1b7e8 }}/malidkan/zspd-coviddashboard:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e4908b53d1484295af6464c34fc1b7e8 }}/zspd-coviddashboard:${{ github.sha }}'
