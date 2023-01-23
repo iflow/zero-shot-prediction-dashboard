@@ -33,10 +33,7 @@ jobs:
         
     - name: Copy the SavedModel to the running TensorFlow Serving container
       run: |
-        echo "${GITHUB_WORKSPACE}"
-        echo "$PWD"
-        cd ../
-        docker cp ${GITHUB_WORKSPACE}/models/vit_serving serving_base:/models/vit_serving
+        docker cp ${GITHUB_WORKSPACE}/vit_serving serving_base:/models/vit_serving
         
     - name: Commit changes to base images # we set the MODEL_NAME environment variable to let TensorFlow Serving know which model to expose as services
       run: |
