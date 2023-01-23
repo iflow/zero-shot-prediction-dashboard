@@ -74,6 +74,7 @@ jobs:
       with:
         app-name: 'zhpd-tfserving2'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_77db2464cc704c8ead660922a3aebb8f }}
-        #images: '${NEW_IMAGE_TAG}'
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_TFSERVING3 }}
+        #publish-profile: ${{ secrets.AzureAppService_PublishProfile_77db2464cc704c8ead660922a3aebb8f }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_bd46ba5fe62c413abd66122e955da53f }}/zspd-tfserving2:${{ github.sha }}'
+        #images: '${NEW_IMAGE_TAG}'
