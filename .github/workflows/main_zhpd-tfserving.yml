@@ -72,4 +72,4 @@ jobs:
         app-name: 'zhpd-tfserving'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_TfServing }}
-        images: '$NEW_IMAGE_TAG'
+        images: '${NEW_IMAGE_TAG}'
