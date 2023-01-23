@@ -1,8 +1,12 @@
-# zero-shot-prediction-dashboard
+# ML deployment with Tensorflow and Gradio 
+
+*A MDS-SDC project*
 
 [![Covid Dashboard Deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-coviddashboard.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-coviddashboard.yml)
-
 [![Gradio App Deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-gradio.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-gradio.yml)
+[![TfServing Deployment](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-tfserving.yml/badge.svg)](https://github.com/iflow/zero-shot-prediction-dashboard/actions/workflows/main_zhpd-tfserving.yml)
+
+# Overview
 
 ![flowchart.png](docs%2Fflowchart.png)
 
