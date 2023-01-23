@@ -72,7 +72,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'zhpd-tfserving2'
+        app-name: 'zhpd-tfserving3'
         slot-name: 'production'
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_TFSERVING3 }}
         #publish-profile: ${{ secrets.AzureAppService_PublishProfile_77db2464cc704c8ead660922a3aebb8f }}
