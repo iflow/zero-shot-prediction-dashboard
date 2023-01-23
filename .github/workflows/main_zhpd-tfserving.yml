@@ -72,4 +72,4 @@ jobs:
         app-name: 'zhpd-tfserving'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_TfServing }}
-        images: '${NEW_IMAGE_TAG}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_857d832c1cff47e281cacd492e5ec597 }}/zspd-tfserving:${{ github.sha }}'
