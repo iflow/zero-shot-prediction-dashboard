@@ -74,7 +74,7 @@ def model_exporter(model: tf.keras.Model):
     return serving_fn
 
 # Export the model
-export_path = "vit_serving"
+export_path = "vit"
 VERSION = 1
 # main
 if __name__ == '__main__':
