@@ -1,0 +1,29 @@
+name: TfServing Deployment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: setup python
+      uses: actions/setup-python@v4
+      with:
+          python-version: 3.8 #install the python needed
+    - name: Install dependencies
+      run: |
+        pip install -r tfserving/requirements.txt
+    - name: Run setup
+      run: |  
+        python tfserving/setup.py
+
+   # - name: Set up Docker Buildx
+   #   uses: docker/setup-buildx-action@v1
