@@ -79,10 +79,11 @@ VERSION = 1
 # main
 if __name__ == '__main__':
 
+    export_dir = os.path.join(export_path, str(VERSION))
     tf.saved_model.save(
         model,
-        os.path.join(export_path, str(VERSION)),
+        export_dir,
         signatures={"serving_default": model_exporter(model)},
     )
 
-    print("Finished")
+    print("[Finished] Model path: " + export_dir)
