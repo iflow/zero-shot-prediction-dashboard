@@ -40,7 +40,6 @@ jobs:
         
     - name: Commit changes to base images # we set the MODEL_NAME environment variable to let TensorFlow Serving know which model to expose as services
       run: |
-        export NEW_IMAGE_TAG=
         docker commit --change "ENV MODEL_NAME vit" serving_base $NEW_IMAGE_TAG
         
     - name: Stop serving_base # we do not need serving_base anymore
